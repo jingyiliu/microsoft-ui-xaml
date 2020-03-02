@@ -19,6 +19,7 @@ class ProgressRing :
 public:
     ProgressRing();
 
+    winrt::AutomationPeer OnCreateAutomationPeer();
     // IFrameworkElement
     void OnApplyTemplate();
 
