@@ -20,9 +20,9 @@ namespace MU_XAP_NAMESPACE
 
 [WUXC_VERSION_MUXONLY]
 [webhosthidden]
-unsealed runtimeclass ProgressBarAutomationPeer : Windows.UI.Xaml.Automation.Peers.RangeBaseAutomationPeer
+unsealed runtimeclass ProgressRingAutomationPeer : Windows.UI.Xaml.Automation.Peers.RangeBaseAutomationPeer
 {
-    ProgressBarAutomationPeer(MU_XC_NAMESPACE.ProgressBar owner);
+    ProgressRingAutomationPeer(MU_XC_NAMESPACE.ProgressRing owner);
 }
 
 }
