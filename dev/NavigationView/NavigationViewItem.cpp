@@ -297,8 +297,11 @@ void NavigationViewItem::ShowSelectionIndicator(bool visible)
 
 void NavigationViewItem::UpdateVisualStateForIconAndContent(bool showIcon, bool showContent)
 {
-    auto stateName = showIcon ? (showContent ? L"IconOnLeft": L"IconOnly") : L"ContentOnly"; 
-    winrt::VisualStateManager::GoToState(*this, stateName, false /*useTransitions*/);
+    if (auto const presenter = m_navigationViewItemPresenter.get())
+    {
+        auto stateName = showIcon ? (showContent ? L"IconOnLeft" : L"IconOnly") : L"ContentOnly";
+        winrt::VisualStateManager::GoToState(presenter, stateName, false /*useTransitions*/);
+    }
 }
 
 void NavigationViewItem::UpdateVisualStateForNavigationViewPositionChange()
@@ -456,10 +459,11 @@ void NavigationViewItem::UpdateVisualState(bool useTransitions)
   
     if (IsOnLeftNav())
     {
-        winrt::VisualStateManager::GoToState(*this, m_isClosedCompact ? L"ClosedCompact" : L"NotClosedCompact", useTransitions); 
-
-        // Backward Compatibility with RS4-, new implementation prefer IconOnLeft/IconOnly/ContentOnly
-        winrt::VisualStateManager::GoToState(*this, shouldShowIcon ? L"IconVisible" : L"IconCollapsed", useTransitions);
+        if (auto const presenter = m_navigationViewItemPresenter.get())
+        {
+            // Backward Compatibility with RS4-, new implementation prefer IconOnLeft/IconOnly/ContentOnly
+            winrt::VisualStateManager::GoToState(m_navigationViewItemPresenter.get(), shouldShowIcon ? L"IconVisible" : L"IconCollapsed", useTransitions);
+        }
     } 
    
     UpdateVisualStateForToolTip();

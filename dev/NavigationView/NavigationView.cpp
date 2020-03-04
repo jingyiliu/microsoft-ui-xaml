@@ -605,7 +605,7 @@ void NavigationView::OnFlyoutClosing(const winrt::IInspectable& sender, const wi
 {
     // If the user selected an parent item in the overflow flyout then the item has not been moved to top primary yet.
     // So we need to move it.
-    if (m_moveTopNavOverflowItemOnFlyoutClose)
+    if (m_moveTopNavOverflowItemOnFlyoutClose && !m_selectionChangeFromOverflowMenu)
     {
         m_moveTopNavOverflowItemOnFlyoutClose = false;
 
